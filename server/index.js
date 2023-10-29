@@ -15,5 +15,8 @@ app.use(cookieParser());
 app.set('view engine', 'ejs');
 app.use(routes);
 
-app.listen(3000);
+const port = process.env.PORT || 3000;
+app.listen(port, _ => {
+    console.log('App deployed at Port: ', port)
+});
 
