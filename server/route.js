@@ -5,6 +5,20 @@ const sendEmail = require('../models/email');
 const router = express.Router();
 
 router
+
+.get('/', (req, res) =>{
+    res.send('Hai');
+})
+
+.get('/get-data', (req, res) => {
+    const data = {
+        nama: 'Jeje'
+    };
+    res.setHeader('Content-Type', 'application/json');
+    res.send(data);
+    return data;
+})
+
 .get('/send_email', (req, res) => {
     const email_response = sendEmail(`${process.env.EMAIL_USER}`, 'kakangtea74@gmail.com', 'test', 'test', 'test');
     console.log(email_response);
