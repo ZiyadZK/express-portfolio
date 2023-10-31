@@ -1,13 +1,28 @@
 const express = require('express');
 const { cookie } = require('express/lib/response');
 const sendEmail = require('../models/email');
+// const headHtml = require('../views/head');
+
 
 const router = express.Router();
 
 router
-
 .get('/', (req, res) =>{
-    res.send('Hai');
+    res
+    .render('home/index');
+})
+
+.get('/dashboard', (req, res) => {
+    const data = {
+        admin: true
+    };
+    res
+    .render('home/dashboard', {data});
+})
+
+.get('/payment', (req, res) => {
+    res
+    .render('home/payment');
 })
 
 .get('/get-data', (req, res) => {
@@ -26,7 +41,13 @@ router
 }) 
 
 .get('/register', (req, res) => {
+    const {username, password} = req.body;
+    const data = {
+        username: username,
+        password: password
+    };
     res
+    // .cookie('register_data_account', data, )
     .render('auth/register')
 })
 
@@ -77,7 +98,7 @@ router
 })
 
 .get('/cookie', (req, res) => {
-    const {username, password} = req.cookies['register_acc_cookie'];
+    const {username, password} = req.cookies['register_acc_cookie']; 
     const data = {
         username: username,
         password: password
